@@ -52,12 +52,14 @@ const Bird = (props) => {
       setBirdSpawnX((prevBirdSpawnX) => prevBirdSpawnX + x);
       birdy.current.style.left = `${birdSpawnX}px`;
       if (isCollide(birdy.current, kevin)) {
-        props.setBirdie(false);
-        setBird(false);
-        birdy.current.style.left = "-200px";
-        setBirdSpawnX(-200);
         window.alert(`You Lost! Score: ${props.score}`);
-        props.setScore(-props.score);
+        window.location.reload();
+        // props.setBirdie(false);
+        // setBird(false);
+        // birdy.current.style.left = "-200px";
+        // setBirdSpawnX(-200);
+
+        // props.setScore(-props.score);
       }
     }, 10);
 
