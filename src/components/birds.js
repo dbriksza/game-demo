@@ -20,6 +20,9 @@ const Bird = (props) => {
 
   const kevin = document.getElementById("kevin");
 
+  let speedModifier = 0;
+  let mainSpeed = 0;
+
   if (birdSpawnX >= 1950 || birdSpawnX <= -500) {
     props.setBirdie(false);
     setBird(false);
@@ -37,8 +40,10 @@ const Bird = (props) => {
         setBirdSpawnY(rnd2);
         if (rnd1 > 1900) {
           setBirdDirection("left");
+          birdy.current.style.transform = "rotateY(0deg)";
         } else {
           setBirdDirection("right");
+          birdy.current.style.transform = "rotateY(180deg)";
         }
         console.log(birdDirection);
         birdy.current.style.left = `${birdSpawnX}px`;
@@ -47,9 +52,9 @@ const Bird = (props) => {
     }, Math.random() * 2000);
   }, [bird]);
 
-  const birdController = (x) =>
+  const birdController = (x, z) =>
     setTimeout(function () {
-      setBirdSpawnX((prevBirdSpawnX) => prevBirdSpawnX + x);
+      setBirdSpawnX((prevBirdSpawnX) => prevBirdSpawnX + x + z);
       birdy.current.style.left = `${birdSpawnX}px`;
       if (isCollide(birdy.current, kevin)) {
         window.alert(`You Lost! Score: ${props.score}`);
@@ -65,11 +70,32 @@ const Bird = (props) => {
 
   if (props.birdie === true) {
     if (birdDirection === "right") {
-      birdController(3);
+      mainSpeed = 3;
+      if (props.moving === true) {
+        if (props.direction === "right") {
+          speedModifier = 2;
+        }
+        if (props.direction === "left") {
+          speedModifier = -2;
+        }
+      } else {
+        speedModifier = 0;
+      }
     }
     if (birdDirection === "left") {
-      birdController(-3);
+      mainSpeed = -3;
+      if (props.moving === true) {
+        if (props.direction === "right") {
+          speedModifier = -2;
+        }
+        if (props.direction === "left") {
+          speedModifier = 2;
+        }
+      }
+    } else {
+      speedModifier = 0;
     }
+    birdController(mainSpeed, speedModifier);
   }
 
   const isCollide = (a, b) => {
@@ -95,6 +121,8 @@ const mapStateToProps = (state) => {
   return {
     birdie: state.birdie,
     score: state.score,
+    direction: state.direction,
+    moving: state.moving,
   };
 };
 
