@@ -1,0 +1,256 @@
+.animationContainer {
+  justify-content: center;
+  white-space: pre-wrap;
+  position: relative;
+  padding-top: 150px;
+  // top: -25vh;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  // background-color: #000000cc;
+  // opacity: 0.9;
+  color: #fff;
+  // box-shadow: 0px 0px 10px black;
+  display: flex;
+  flex-direction: row;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.motoranimationcontainer {
+  display: block;
+  position: relative;
+  height: 300px;
+  min-width: 300px;
+  align-items: center;
+  .motoranimbackground {
+    position: relative;
+    background: url("../assets/motorbike_background.png") repeat 0 0;
+    background-size: cover;
+    animation: slide 3s linear infinite;
+    height: 300px;
+    width: 300px;
+    .edgeblurleft {
+      position: absolute;
+      left: 0px;
+      height: 300px;
+      width: 150px;
+    }
+    .edgeblurright {
+      position: absolute;
+      transform: scaleX(-1);
+      right: 0px;
+      height: 300px;
+      width: 150px;
+    }
+  }
+  .motoranim {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+  .wheel {
+    animation: rotating 0.5s linear infinite;
+  }
+  .driver {
+    animation: driver 0.5s cubic-bezier(0.31, 0.44, 0.445, 1.65) infinite;
+  }
+}
+
+.plantIdle {
+  animation: plant 0.5s cubic-bezier(0.33333, 0.66667, 0.66667, 1) infinite;
+}
+.plantActive {
+  transform-origin: 50% 55% !important;
+  animation: plantFlip 1s linear infinite;
+}
+
+.kevinmotor {
+  -webkit-transition: -webkit-transform 0.25s ease-in-out;
+  -ms-transition: -ms-transform 0.25s ease-in-out;
+  transition: transform 0.25s ease-in-out;
+}
+.bonus-features-container {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .motorbike {
+    width: 350px;
+    filter: contrast(105%);
+  }
+
+  .bonus-features-CTA {
+    width: 100%;
+    margin-left: 20px;
+
+    .bonus-features-title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 0;
+    }
+
+    .bonus-features-description {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      line-height: 1.4;
+    }
+
+    .sign-up-CTA {
+      background-color: #5666fa;
+      color: white;
+      border: none;
+      padding: 10px 37px;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      transition: 0.22s ease;
+
+      cursor: pointer;
+      &:focus {
+        outline: 0;
+      }
+
+      &:hover {
+        filter: brightness(130%);
+      }
+    }
+  }
+}
+
+//Motorbike Animation keyframes
+
+@keyframes slide {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -300px 0;
+  }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes plant {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg) translate(5px, -5px);
+  }
+  50% {
+    transform: rotate(10deg) translate(-5px, -5px);
+  }
+  75% {
+    transform: rotate(-7deg) translate(-7px, -8px);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes driver {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-3deg) translate(2px, -1px);
+  }
+  50% {
+    transform: rotate(5deg) translate(-3px, -2px);
+  }
+  75% {
+    transform: rotate(-3deg) translate(-4px, -3px);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes plantFlip {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+    top: -10%;
+  }
+  50% {
+    transform: rotate(180deg);
+    top: -20%;
+  }
+  75% {
+    transform: rotate(270deg);
+    top: -10%;
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.33333, 0.66667, 0.66667, 1);
+  }
+  69.0983% {
+    transform: translatey(-150px);
+    animation-timing-function: cubic-bezier(0.33333, 0, 0.66667, 0.33333);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes jumpLeft {
+  0% {
+    transform: rotateY(180deg);
+  }
+  1% {
+    transform: translateY(0) rotateY(180deg);
+    animation-timing-function: cubic-bezier(0.33333, 0.66667, 0.66667, 1);
+  }
+  69.0983% {
+    transform: translatey(-150px) rotateY(180deg);
+    animation-timing-function: cubic-bezier(0.33333, 0, 0.66667, 0.33333);
+  }
+  100% {
+    transform: translateY(0) rotateY(180deg);
+  }
+}
+
+//Motorbike Animation Media Queries
+
+@media screen and (max-width: 600px) {
+  .bonus-features-container {
+    flex-direction: column;
+
+    .bonus-features-CTA {
+      padding: 0 5%;
+    }
+    .motorbike {
+      width: 250px;
+    }
+    .bonus-features-CTA {
+      margin-left: 0;
+      .fonus-features-title {
+        font-size: 1.2rem;
+      }
+      .bonus-features-description {
+        font-size: 1rem;
+      }
+      .sign-up-CTA {
+        font-size: 1.15rem;
+        width: 50%;
+      }
+    }
+  }
+}
